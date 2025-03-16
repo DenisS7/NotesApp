@@ -16,6 +16,6 @@
     </WindowChrome.WindowChrome>
 
     <Grid>
-        <view:NoteView/>
+        <view:NoteView DataContext="{Binding CurrentViewModel}"/>
     </Grid>
 </Window>

@@ -39,6 +39,7 @@ namespace NotesApp.ViewModel
             noteText = note.Text;
             CreateNoteCommand = new CreateNoteCommand(navigationService);
             CloseCommand = new CloseCommand(navigationService);
+            OpenNoteMenuCommand = new OpenNoteMenuCommand(navigationService);
         }
 	}
 }

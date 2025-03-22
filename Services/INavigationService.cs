@@ -11,6 +11,6 @@ namespace NotesApp.Services
     {
         void CreateNote();
         void OpenNote(NoteViewModel noteViewModel);
-        void CloseNote(NoteViewModel noteViewModel);
+        void CloseWindow(ViewModelBase viewModelBase);
     }
 }

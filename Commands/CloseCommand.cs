@@ -19,8 +19,8 @@ namespace NotesApp.Commands
 
         public override void Execute(object? parameter)
         {
-            if(parameter is NoteViewModel noteViewModel)
-                navigationService.CloseNote(noteViewModel);
+            if(parameter is ViewModelBase viewModelBase)
+                navigationService.CloseWindow(viewModelBase);
         }
     }
 }

@@ -16,11 +16,14 @@ namespace NotesApp
         protected override void OnStartup(StartupEventArgs e)
         {
             NoteList noteList = new NoteList();
+            noteList.CreateNote();
+            noteList.CreateNote();
+            noteList.CreateNote();
             NavigationService navigationService = new NavigationService(noteList);
-            navigationService.CreateNote();
-            //MainWindow = new NoteView()
+            navigationService.OpenMenu();
+            //MainWindow = new NoteListView()
             //{
-            //    DataContext = new NoteViewModel(navigationService, note)
+            //    DataContext = new NoteListViewModel(navigationService, noteList)
             //};
             //MainWindow.Show();
             base.OnStartup(e);

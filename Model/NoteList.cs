@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,12 +9,12 @@ namespace NotesApp.Model
 {
     public class NoteList
     {
-        public List<Note> Notes { get; set; }
+        public ObservableCollection<Note> Notes { get; set; }
         public List<Tag> Tags { get; set; }
 
         public NoteList()
         {
-            Notes = new List<Note>();
+            Notes = new ObservableCollection<Note>();
             Tags = new List<Tag>();
         }
 
@@ -47,6 +48,9 @@ namespace NotesApp.Model
         public Note CreateNote()
         {
             Note note = new Note(GetNewNoteID(), DateTime.Now);
+            note.Text = "EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT\n" +
+                        "EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT\n" +
+                        "EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT EXAMPLE TEXT\n";
             Notes.Add(note);
             return note;
         }

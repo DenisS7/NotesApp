@@ -10,7 +10,7 @@ namespace NotesApp.Model
     {
         public int ID { get; }
         public string Name { get; }
-        public string Text { get; }
+        public string Text { get; set; }
         public List<Tag> Tags { get; set; }
         public DateTime CreatedAtDate { get; }
         public DateTime LastUpdatedDate { get; set; }
@@ -19,6 +19,7 @@ namespace NotesApp.Model
         {
             ID = id;
             CreatedAtDate = createdAtDate;
+            LastUpdatedDate = createdAtDate;
             Name = string.Empty;
             Text = string.Empty;
             Tags = [];

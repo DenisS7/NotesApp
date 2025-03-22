@@ -13,7 +13,7 @@ namespace NotesApp.Services
     public class NavigationService : INavigationService
     {
         private readonly NoteList noteList;
-        private readonly Dictionary<NoteViewModel, Window> openNotes = new Dictionary<NoteViewModel, Window>();
+        private readonly Dictionary<ViewModelBase, Window> openWindows = new Dictionary<ViewModelBase, Window>();
 
         public NavigationService(NoteList noteList)
         {
@@ -31,24 +31,43 @@ namespace NotesApp.Services
             NoteView noteWindow = new NoteView();
             noteWindow.DataContext = noteViewModel;
 
-            openNotes.Add(noteViewModel, noteWindow);
+            openWindows.Add(noteViewModel, noteWindow);
 
             noteWindow.Closed += (sender, args) =>
             {
-                if (openNotes.ContainsKey(noteViewModel))
+                if (openWindows.ContainsKey(noteViewModel))
                 {
-                    openNotes.Remove(noteViewModel);
+                    openWindows.Remove(noteViewModel);
                 }
             };
 
             noteWindow.Show();
         }
 
-        public void CloseNote(NoteViewModel noteViewModel)
+        public void OpenMenu()
         {
-            if (openNotes.TryGetValue(noteViewModel, out Window noteWindow))
+            NoteListViewModel noteListViewModel = new NoteListViewModel(this, noteList);
+            NoteListView noteListWindow = new NoteListView();
+            noteListWindow.DataContext = noteListViewModel;
+
+            openWindows.Add(noteListViewModel, noteListWindow);
+
+            noteListWindow.Closed += (sender, args) =>
             {
-                noteWindow.Close();
+                if (openWindows.ContainsKey(noteListViewModel))
+                {
+                    openWindows.Remove(noteListViewModel);
+                }
+            };
+
+            noteListWindow.Show();
+        }
+
+        public void CloseWindow(ViewModelBase viewModelBase)
+        {
+            if (openWindows.TryGetValue(viewModelBase, out Window window))
+            {
+                window.Close();
             }
         }
     }

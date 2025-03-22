@@ -24,6 +24,7 @@ namespace NotesApp.ViewModel
 			set
 			{
 				noteText = value;
+                note.Text = noteText;
 				OnPropertyChanged(nameof(NoteText));
 			}
 		}

@@ -12,6 +12,7 @@ namespace NotesApp.Services
 {
     public class NavigationService : INavigationService
     {
+        public event EventHandler<Note> NoteCreated;
         private readonly NoteList noteList;
         private readonly Dictionary<ViewModelBase, Window> openWindows = new Dictionary<ViewModelBase, Window>();
 
@@ -24,6 +25,7 @@ namespace NotesApp.Services
         {
             Note note = noteList.CreateNote();
             NoteViewModel noteViewModel = new NoteViewModel(this, note);
+            NoteCreated?.Invoke(this, note);
             OpenNote(noteViewModel);
         }
         public void OpenNote(NoteViewModel noteViewModel)
@@ -46,6 +48,14 @@ namespace NotesApp.Services
 
         public void OpenMenu()
         {
+            foreach (var window in openWindows)
+            {
+                if (window.Key is NoteListViewModel)
+                {
+                    window.Value.Activate();
+                    return;
+                }
+            }
             NoteListViewModel noteListViewModel = new NoteListViewModel(this, noteList);
             NoteListView noteListWindow = new NoteListView();
             noteListWindow.DataContext = noteListViewModel;

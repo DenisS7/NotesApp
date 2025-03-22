@@ -26,12 +26,18 @@ namespace NotesApp.ViewModel
         {
             this.navigationService = navigationService;
             this.noteList = noteList;
+            navigationService.NoteCreated += OnNoteCreated;
             Notes = new ObservableCollection<Note>(noteList.Notes);
             CloseCommand = new CloseCommand(navigationService);
             ShortNoteViewModels =
                 new ObservableCollection<ShortNoteViewModel>(
                     noteList.Notes.Select(note => new ShortNoteViewModel(note)));
             CreateNoteCommand = new CreateNoteCommand(navigationService);
+        }
+
+        private void OnNoteCreated(object sender, Note newNote)
+        {
+            ShortNoteViewModels.Add(new ShortNoteViewModel(newNote));
         }
     }
 }

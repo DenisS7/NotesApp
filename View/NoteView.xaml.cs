@@ -18,7 +18,7 @@ namespace NotesApp.View
     /// <summary>
     /// Interaction logic for NoteView.xaml
     /// </summary>
-    public partial class NoteView : UserControl
+    public partial class NoteView : Window
     {
         public NoteView()
         {

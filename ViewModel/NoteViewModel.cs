@@ -4,11 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NotesApp.Commands;
+using NotesApp.Model;
+using NotesApp.Services;
 
 namespace NotesApp.ViewModel
 {
     public class NoteViewModel : ViewModelBase
     {
+        private readonly INavigationService navigationService;
+        private Note note;
 		private string noteText;
 		public string NoteText
 		{
@@ -27,9 +32,13 @@ namespace NotesApp.ViewModel
 		public ICommand CloseCommand { get; }
 		public ICommand OpenNoteMenuCommand { get; }
 
-        public NoteViewModel()
+        public NoteViewModel(NavigationService navigationService, Note note)
         {
-            
+            this.navigationService = navigationService;
+            this.note = note;
+            noteText = note.Text;
+            CreateNoteCommand = new CreateNoteCommand(navigationService);
+            CloseCommand = new CloseCommand(navigationService);
         }
 	}
 }

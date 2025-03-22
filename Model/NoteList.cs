@@ -38,5 +38,17 @@ namespace NotesApp.Model
 
             return notesWithTags;
         }
+
+        private int GetNewNoteID()
+        {
+            return Notes.Count();
+        }
+
+        public Note CreateNote()
+        {
+            Note note = new Note(GetNewNoteID(), DateTime.Now);
+            Notes.Add(note);
+            return note;
+        }
     }
 }

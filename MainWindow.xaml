@@ -10,12 +10,4 @@
         Title="NotesApp"
         Height="300" Width="300"
         MinHeight="100" MinWidth="175">
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="10" CornerRadius="5" CaptionHeight="0"/>
-    </WindowChrome.WindowChrome>
-
-    <Grid>
-        <view:NoteView DataContext="{Binding CurrentViewModel}"/>
-    </Grid>
 </Window>

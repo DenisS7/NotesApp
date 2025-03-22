@@ -1,6 +1,9 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using NotesApp.Model;
+using NotesApp.Services;
+using NotesApp.View;
 using NotesApp.ViewModel;
 
 namespace NotesApp
@@ -12,11 +15,14 @@ namespace NotesApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel()
-            };
-            MainWindow.Show();
+            NoteList noteList = new NoteList();
+            NavigationService navigationService = new NavigationService(noteList);
+            navigationService.CreateNote();
+            //MainWindow = new NoteView()
+            //{
+            //    DataContext = new NoteViewModel(navigationService, note)
+            //};
+            //MainWindow.Show();
             base.OnStartup(e);
         }
     }

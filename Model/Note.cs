@@ -12,10 +12,13 @@ namespace NotesApp.Model
         public string Name { get; }
         public string Text { get; }
         public List<Tag> Tags { get; set; }
+        public DateTime CreatedAtDate { get; }
+        public DateTime LastUpdatedDate { get; set; }
 
-        public Note(int id)
+        public Note(int id, DateTime createdAtDate)
         {
             ID = id;
+            CreatedAtDate = createdAtDate;
             Name = string.Empty;
             Text = string.Empty;
             Tags = [];

@@ -24,5 +24,10 @@ namespace NotesApp.View
         {
             InitializeComponent();
         }
+
+        private void DragBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

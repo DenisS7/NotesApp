@@ -30,6 +30,10 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
+                <Border Grid.Column="1" 
+                        Background="Transparent" 
+                        MouseLeftButtonDown="DragBar_MouseLeftButtonDown"/>
+
                 <Button Grid.Column="0" 
                         Background="Transparent" 
                         VerticalAlignment="Stretch"

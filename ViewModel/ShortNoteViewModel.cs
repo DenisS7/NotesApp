@@ -10,8 +10,8 @@ namespace NotesApp.ViewModel
     public class ShortNoteViewModel : ViewModelBase
     {
         private Note note { get; }
-        private string noteText => note.Text;
-        private DateTime lastUpdateDate => note.LastUpdatedDate;
+        public string noteText => note.Text;
+        public DateTime lastUpdateDate => note.LastUpdatedDate;
 
         public ShortNoteViewModel(Note note)
         {

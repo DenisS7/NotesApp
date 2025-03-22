@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NotesApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300"
-             MinHeight="150">
+             MinHeight="0">
     <Border CornerRadius="5" BorderThickness="0" Background="Gray">
         <Grid ClipToBounds="True">
             <Grid.RowDefinitions>
@@ -14,8 +14,17 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Rectangle Grid.Row="0" Fill="LightBlue"></Rectangle>
-            <TextBlock Grid.Row="1" Text="{Binding noteText}" FontSize="15"/>
+            <Rectangle Grid.Row="0" 
+                       Fill="LightBlue"/>
+            <TextBlock Grid.Row="1"
+                       Margin="10 20 10 10"
+                       Text="{Binding noteText}" 
+                       FontSize="13"
+                       Foreground="White"
+                       TextWrapping="Wrap"
+                       FontWeight="DemiBold"
+                       TextTrimming="CharacterEllipsis"
+                       MaxHeight="150"/>
         </Grid>
     </Border>
 </UserControl>

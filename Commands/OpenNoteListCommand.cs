@@ -7,11 +7,11 @@ using NotesApp.Services;
 
 namespace NotesApp.Commands
 {
-    class OpenNoteMenuCommand : CommandBase
+    class OpenNoteListCommand : CommandBase
     {
         private NavigationService navigationService;
 
-        public OpenNoteMenuCommand(NavigationService navigationService)
+        public OpenNoteListCommand(NavigationService navigationService)
         {
             this.navigationService = navigationService;
         }

@@ -7,16 +7,54 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300"
              MinHeight="0">
-    <Button Background="Transparent" 
+
+    <UserControl.Resources>
+        <Style x:Key="ShadeButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter />
+
+                            <Border x:Name="HoverOverlay" Background="Transparent"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="HoverOverlay" 
+                                        Property="Background" 
+                                        Value="#25000000"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Button Style="{StaticResource ShadeButtonStyle}"
+            Background="Transparent" 
+            BorderBrush="Transparent"
             BorderThickness="0" 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            Command="{Binding OpenNoteCommand}">
+            VerticalContentAlignment="Stretch">
+
+        <Button.InputBindings>
+            <MouseBinding Command="{Binding OpenNoteCommand}" 
+                          MouseAction="LeftDoubleClick"/>
+        </Button.InputBindings>
         <Border CornerRadius="5" 
                 BorderThickness="0" 
                 Background="Gray">
+            <Border.OpacityMask>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Border CornerRadius="4" Height="150" Width="300" Background="White"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Border.OpacityMask>
+
             <Grid ClipToBounds="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5"/>

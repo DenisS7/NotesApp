@@ -15,6 +15,21 @@ namespace NotesApp.ViewModel
     {
         private readonly INavigationService navigationService;
         private Note note;
+        private bool isMenuVisible;
+
+        public bool IsMenuVisible
+        {
+            get
+            {
+                return isMenuVisible;
+            }
+            set
+            {
+                isMenuVisible = value;
+                OnPropertyChanged(nameof(IsMenuVisible));
+            }
+        }
+
 		private string noteText;
 		public int NoteId { get; }
 		public string NoteText
@@ -35,16 +50,31 @@ namespace NotesApp.ViewModel
 		public ICommand CreateNoteCommand { get; }
 		public ICommand CloseCommand { get; }
 		public ICommand OpenNoteMenuCommand { get; }
+        public ICommand CloseNoteMenuCommand { get; }
+        public ICommand OpenNoteListCommand { get; }
 
         public NoteViewModel(NavigationService navigationService, Note note)
         {
             this.navigationService = navigationService;
             this.note = note;
+            isMenuVisible = false;
             noteText = note.Text;
             NoteId = note.ID;
+            OpenNoteListCommand = new OpenNoteListCommand(navigationService);
             CreateNoteCommand = new CreateNoteCommand(navigationService);
             CloseCommand = new CloseCommand(navigationService);
-            OpenNoteMenuCommand = new OpenNoteMenuCommand(navigationService);
+            OpenNoteMenuCommand = new RelayCommand(param => ShowMenu());
+            CloseNoteMenuCommand = new RelayCommand(param => CloseMenu());
         }
-	}
+
+        private void ShowMenu()
+        {
+            IsMenuVisible = true;
+        }
+
+        private void CloseMenu()
+        {
+            IsMenuVisible = false;
+        }
+    }
 }

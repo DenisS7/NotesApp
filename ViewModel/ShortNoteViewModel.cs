@@ -15,11 +15,11 @@ namespace NotesApp.ViewModel
     {
         private Note note { get; }
         private NavigationService navigationService;
+        public int NoteID => note.ID;
         public string NoteText => note.Text;
         public DateTime LastUpdateDate => note.LastUpdatedDate;
 
         public ICommand OpenNoteCommand { get; }
-
         public ShortNoteViewModel(Note note, NavigationService navigationService)
         {
             this.note = note;

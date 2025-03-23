@@ -17,6 +17,8 @@ namespace NotesApp.ViewModel
         private Note note;
         private bool isMenuVisible;
 
+        public Note Note => note;
+
         public bool IsMenuVisible
         {
             get
@@ -48,6 +50,7 @@ namespace NotesApp.ViewModel
 		}
 
 		public ICommand CreateNoteCommand { get; }
+        public ICommand DeleteNoteCommand { get; }
 		public ICommand CloseCommand { get; }
 		public ICommand OpenNoteMenuCommand { get; }
         public ICommand CloseNoteMenuCommand { get; }
@@ -62,6 +65,7 @@ namespace NotesApp.ViewModel
             NoteId = note.ID;
             OpenNoteListCommand = new OpenNoteListCommand(navigationService);
             CreateNoteCommand = new CreateNoteCommand(navigationService);
+            DeleteNoteCommand = new DeleteNoteCommand(navigationService);
             CloseCommand = new CloseCommand(navigationService);
             OpenNoteMenuCommand = new RelayCommand(param => ShowMenu());
             CloseNoteMenuCommand = new RelayCommand(param => CloseMenu());

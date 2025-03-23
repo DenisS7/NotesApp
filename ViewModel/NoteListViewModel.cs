@@ -16,7 +16,6 @@ namespace NotesApp.ViewModel
         private NavigationService navigationService;
         private NoteList noteList;
 
-        public ObservableCollection<Note> Notes { get; private set; }
         public ObservableCollection<ShortNoteViewModel> ShortNoteViewModels { get; private set; }
 
         public ICommand CloseCommand { get; }
@@ -27,7 +26,7 @@ namespace NotesApp.ViewModel
             this.navigationService = navigationService;
             this.noteList = noteList;
             navigationService.NoteCreated += OnNoteCreated;
-            Notes = new ObservableCollection<Note>(noteList.Notes);
+            navigationService.NoteDeleted += OnNoteDeleted;
             CloseCommand = new CloseCommand(navigationService);
             ShortNoteViewModels =
                 new ObservableCollection<ShortNoteViewModel>(
@@ -38,6 +37,18 @@ namespace NotesApp.ViewModel
         private void OnNoteCreated(object sender, Note newNote)
         {
             ShortNoteViewModels.Add(new ShortNoteViewModel(newNote, navigationService));
+        }
+
+        private void OnNoteDeleted(object sender, Note deletedNote)
+        {
+            foreach (var shortNoteViewModel in ShortNoteViewModels)
+            {
+                if (shortNoteViewModel.NoteID == deletedNote.ID)
+                {
+                    ShortNoteViewModels.Remove(shortNoteViewModel);
+                    break;
+                }
+            }
         }
     }
 }

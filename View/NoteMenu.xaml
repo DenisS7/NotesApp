@@ -37,6 +37,8 @@
                 Padding="10 0 0 0"
                 FontSize="20"
                 BorderThickness="0"
-                BorderBrush="Transparent"/>
+                BorderBrush="Transparent"
+                Command="{Binding DeleteNoteCommand}"
+                CommandParameter="{Binding Note}"/>
     </Grid>
 </UserControl>

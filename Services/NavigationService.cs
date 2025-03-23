@@ -13,6 +13,7 @@ namespace NotesApp.Services
     public class NavigationService : INavigationService
     {
         public event EventHandler<Note> NoteCreated;
+        public event EventHandler<Note> NoteDeleted;
         private readonly NoteList noteList;
         private readonly Dictionary<ViewModelBase, Window> openWindows = new Dictionary<ViewModelBase, Window>();
 
@@ -26,6 +27,23 @@ namespace NotesApp.Services
             Note note = noteList.CreateNote();
             NoteCreated?.Invoke(this, note);
             OpenNote(note);
+        }
+
+        public void DeleteNote(Note note)
+        {
+            if (noteList.Notes.Contains(note))
+            {
+                foreach (var window in openWindows)
+                {
+                    if (window.Key is NoteViewModel noteViewModel)
+                    {
+                        if(noteViewModel.NoteId == note.ID)
+                            CloseWindow(noteViewModel);
+                    }
+                }
+                noteList.Notes.Remove(note);
+                NoteDeleted.Invoke(this, note);
+            }
         }
         public void OpenNote(Note note)
         {

@@ -16,6 +16,7 @@ namespace NotesApp.ViewModel
         private readonly INavigationService navigationService;
         private Note note;
 		private string noteText;
+		public int NoteId { get; }
 		public string NoteText
 		{
 			get
@@ -40,6 +41,7 @@ namespace NotesApp.ViewModel
             this.navigationService = navigationService;
             this.note = note;
             noteText = note.Text;
+            NoteId = note.ID;
             CreateNoteCommand = new CreateNoteCommand(navigationService);
             CloseCommand = new CloseCommand(navigationService);
             OpenNoteMenuCommand = new OpenNoteMenuCommand(navigationService);

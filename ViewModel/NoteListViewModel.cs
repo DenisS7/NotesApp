@@ -31,13 +31,13 @@ namespace NotesApp.ViewModel
             CloseCommand = new CloseCommand(navigationService);
             ShortNoteViewModels =
                 new ObservableCollection<ShortNoteViewModel>(
-                    noteList.Notes.Select(note => new ShortNoteViewModel(note)));
+                    noteList.Notes.Select(note => new ShortNoteViewModel(note, navigationService)));
             CreateNoteCommand = new CreateNoteCommand(navigationService);
         }
 
         private void OnNoteCreated(object sender, Note newNote)
         {
-            ShortNoteViewModels.Add(new ShortNoteViewModel(newNote));
+            ShortNoteViewModels.Add(new ShortNoteViewModel(newNote, navigationService));
         }
     }
 }

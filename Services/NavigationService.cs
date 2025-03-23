@@ -24,12 +24,20 @@ namespace NotesApp.Services
         public void CreateNote()
         {
             Note note = noteList.CreateNote();
-            NoteViewModel noteViewModel = new NoteViewModel(this, note);
             NoteCreated?.Invoke(this, note);
-            OpenNote(noteViewModel);
+            OpenNote(note);
         }
-        public void OpenNote(NoteViewModel noteViewModel)
+        public void OpenNote(Note note)
         {
+            foreach (var window in openWindows)
+            {
+                if (window.Key is NoteViewModel currentNoteViewModel)
+                {
+                    if (currentNoteViewModel.NoteId == note.ID)
+                        return;
+                }
+            }
+            NoteViewModel noteViewModel = new NoteViewModel(this, note);
             NoteView noteWindow = new NoteView();
             noteWindow.DataContext = noteViewModel;
 

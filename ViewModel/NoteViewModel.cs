@@ -44,7 +44,8 @@ namespace NotesApp.ViewModel
 			{
 				noteText = value;
                 note.Text = noteText;
-				OnPropertyChanged(nameof(NoteText));
+                note.LastUpdatedDate = DateTime.Now;
+                OnPropertyChanged(nameof(NoteText));
 				NoteUpdateMessageBus.MessageNoteUpdated(note);
 			}
 		}

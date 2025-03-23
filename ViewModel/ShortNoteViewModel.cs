@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NotesApp.Message;
 using NotesApp.Model;
 
 namespace NotesApp.ViewModel
@@ -16,6 +17,15 @@ namespace NotesApp.ViewModel
         public ShortNoteViewModel(Note note)
         {
             this.note = note;
+            NoteUpdateMessageBus.NoteUpdated += OnNoteUpdated;
+        }
+
+        private void OnNoteUpdated(Note note)
+        {
+            if (this.note.ID == note.ID)
+            {
+                OnPropertyChanged(nameof(noteText));
+            }
         }
     }
 }

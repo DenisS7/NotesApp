@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NotesApp.Commands;
+using NotesApp.Message;
 using NotesApp.Model;
 using NotesApp.Services;
 
@@ -26,6 +27,7 @@ namespace NotesApp.ViewModel
 				noteText = value;
                 note.Text = noteText;
 				OnPropertyChanged(nameof(NoteText));
+				NoteUpdateMessageBus.MessageNoteUpdated(note);
 			}
 		}
 

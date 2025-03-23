@@ -78,7 +78,7 @@
                      Foreground="White"
                      CaretBrush="White"
                      TextWrapping="Wrap"
-                     Text="{Binding NoteText, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding NoteText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
 
     </Border>

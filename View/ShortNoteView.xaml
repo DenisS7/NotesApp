@@ -31,48 +31,58 @@
         </Style>
     </UserControl.Resources>
 
-    <Button Style="{StaticResource ShadeButtonStyle}"
-            Background="Transparent" 
-            BorderBrush="Transparent"
-            BorderThickness="0" 
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch">
-
-        <Button.InputBindings>
-            <MouseBinding Command="{Binding OpenNoteCommand}" 
+    <Border CornerRadius="5" 
+        BorderThickness="0"
+        BorderBrush="Transparent"
+        Background="Gray">
+        <Border.InputBindings>
+            <MouseBinding Command="{Binding OpenNoteCommand}"
                           MouseAction="LeftDoubleClick"/>
-        </Button.InputBindings>
-        <Border CornerRadius="5" 
-                BorderThickness="0" 
-                Background="Gray">
-            <Border.OpacityMask>
-                <VisualBrush>
-                    <VisualBrush.Visual>
-                        <Border CornerRadius="4" Height="150" Width="300" Background="White"/>
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </Border.OpacityMask>
+        </Border.InputBindings>
+        <Border.OpacityMask>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Border CornerRadius="4" Height="150" Width="300" Background="White"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Border.OpacityMask>
 
+        <Border BorderThickness="0" 
+                BorderBrush="Transparent">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#25000000"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
             <Grid ClipToBounds="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="93*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5"/>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Rectangle Grid.Row="0" 
-                           Fill="LightBlue"/>
-                <TextBlock Grid.Row="1"
-                           Margin="10 20 10 10"
+                           Fill="LightBlue" Grid.ColumnSpan="2"/>
+
+                <TextBlock Grid.Row="2"
+                           Margin="10,10,10,10"
                            Text="{Binding NoteText}" 
                            FontSize="13"
                            Foreground="White"
                            TextWrapping="Wrap"
                            FontWeight="DemiBold"
                            TextTrimming="CharacterEllipsis"
-                           MaxHeight="150"/>
+                           MaxHeight="150" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
-    </Button>
+    </Border>
 </UserControl>

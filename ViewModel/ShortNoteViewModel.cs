@@ -32,6 +32,7 @@ namespace NotesApp.ViewModel
         {
             if (this.note.ID == note.ID)
             {
+                OnPropertyChanged(nameof(LastUpdateDate));
                 OnPropertyChanged(nameof(NoteText));
             }
         }

@@ -17,7 +17,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
 
-    <Border CornerRadius="0" Background="#383838">
+    <Border CornerRadius="0" Background="{StaticResource NoteBrush}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -87,7 +87,7 @@
             <Border Grid.Row="0" 
                     Grid.RowSpan="2" 
                     x:Name="OverlayMenu" 
-                    Background="#40000000"
+                    Background="{StaticResource DisabledShadeBrush}"
                     Visibility="{Binding IsMenuVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch">

@@ -3,6 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:NotesApp">
     <Application.Resources>
-         
+        <Color x:Key="Note">#383838</Color>
+        <Color x:Key="NoteList">#242424</Color>
+        <Color x:Key="SearchBox">#404040</Color>
+        <Color x:Key="SearchBoxText">#b5b5b5</Color>
+        <Color x:Key="HoverShade">#10FFFFFF</Color>
+        <Color x:Key="DisabledShade">#40000000</Color>
+
+        <SolidColorBrush x:Key="NoteBrush" Color="{StaticResource Note}"/>
+        <SolidColorBrush x:Key="NoteListBrush" Color="{StaticResource NoteList}"/>
+        <SolidColorBrush x:Key="SearchBoxBrush" Color="{StaticResource SearchBox}"/>
+        <SolidColorBrush x:Key="SearchBoxTextBrush" Color="{StaticResource SearchBoxText}"/>
+        <SolidColorBrush x:Key="HoverShadeBrush" Color="{StaticResource HoverShade}"/>
+        <SolidColorBrush x:Key="DisabledShadeBrush" Color="{StaticResource DisabledShade}"/>
     </Application.Resources>
 </Application>

@@ -29,6 +29,8 @@
                 FontSize="20"
                 BorderThickness="0"
                 BorderBrush="Transparent"
+                Background="{StaticResource NoteBrush}"
+                Foreground="White"
                 Command="{Binding OpenNoteListCommand}"/>
         <Button Grid.Row="2"
                 Content="Delete Note"
@@ -38,6 +40,8 @@
                 FontSize="20"
                 BorderThickness="0"
                 BorderBrush="Transparent"
+                Background="{StaticResource NoteBrush}"
+                Foreground="White"
                 Command="{Binding DeleteNoteCommand}"
                 CommandParameter="{Binding Note}"/>
     </Grid>

@@ -57,6 +57,7 @@ namespace NotesApp.ViewModel
 
         private void OpenNoteWindow()
         {
+            IsShortNoteMenuOpen = false;
             navigationService.OpenNote(note);
         }
     }

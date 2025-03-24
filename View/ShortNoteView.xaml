@@ -43,7 +43,7 @@
     <Border CornerRadius="5" 
         BorderThickness="0"
         BorderBrush="Transparent"
-        Background="#383838">
+        Background="{StaticResource NoteBrush}">
         <Border.InputBindings>
             <MouseBinding Command="{Binding OpenNoteCommand}"
                           MouseAction="LeftDoubleClick"/>
@@ -63,10 +63,10 @@
                     <Setter Property="Background" Value="Transparent"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsShortNoteMenuOpen}" Value="True">
-                            <Setter Property="Background" Value="#10FFFFFF"/>
+                            <Setter Property="Background" Value="{StaticResource HoverShadeBrush}"/>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#10FFFFFF"/>
+                            <Setter Property="Background" Value="{StaticResource HoverShadeBrush}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -126,10 +126,13 @@
                             Command="{Binding OpenShortNoteMenuCommand}"/>
                     <Popup Placement="Bottom"
                            PlacementTarget="{Binding ElementName=OptionsButton}"
+                           HorizontalOffset="-40"
+                           AllowsTransparency="True"
                            IsOpen="{Binding IsShortNoteMenuOpen, Mode=TwoWay}"
-                           StaysOpen="True">
-                        <Border Background="#494949"
+                           StaysOpen="False">
+                        <Border Background="{StaticResource NoteBrush}"
                                 BorderThickness="1"
+                                CornerRadius="5"
                                 BorderBrush="Black">
                             <StackPanel>
                                 <Button Content="Open note" 

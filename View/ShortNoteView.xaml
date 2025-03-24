@@ -12,6 +12,8 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter"/>
+        <converters:InvertBooleanAndToVisibilityConverter x:Key="InvertBooleanAndToVisibilityConverter"/>
+        <converters:BooleanOrToVisibilityConverter x:Key="BooleanOrToVisibilityConverter"/>
 
         <Style TargetType="Button" x:Key="NoMouseHoverButtonStyle">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -60,6 +62,9 @@
                 <Style TargetType="Border">
                     <Setter Property="Background" Value="Transparent"/>
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsShortNoteMenuOpen}" Value="True">
+                            <Setter Property="Background" Value="#10FFFFFF"/>
+                        </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#10FFFFFF"/>
                         </Trigger>
@@ -83,28 +88,74 @@
                            Foreground="LightSkyBlue"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
-                           Visibility="{Binding IsMouseOver,
-                                        RelativeSource={RelativeSource AncestorType=Border},
-                                        Converter={StaticResource InvertBooleanToVisibilityConverter}}"
-                           Margin="0 5 10 0"/>
+                           Margin="0 5 10 0">
+                        <TextBlock.Visibility>
+                            <MultiBinding Converter="{StaticResource InvertBooleanAndToVisibilityConverter}">
+                                <Binding Path="IsMouseOver"
+                                         RelativeSource="{RelativeSource AncestorType=Border}"/>
+                            <Binding Path="IsShortNoteMenuOpen"/>
+                            </MultiBinding>
+                        </TextBlock.Visibility>
+                </TextBlock>
 
-                <Button Grid.Row="1"
-                        Style="{StaticResource NoMouseHoverButtonStyle}"
-                        x:Name="OptionsButton"
-                        Content="⋯"
-                        FontSize="20"
-                        Padding="0 -5 0 0"
-                        VerticalContentAlignment="Top"
-                        HorizontalContentAlignment="Center"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Visibility="{Binding IsMouseOver,
-                                    RelativeSource={RelativeSource AncestorType=Border},
-                                    Converter={StaticResource BooleanToVisibilityConverter}}"
-                        Margin="0 0 10 0"
-                        Foreground="White"
-                        BorderThickness="0"
-                        BorderBrush="Transparent"/>
+                <StackPanel Grid.Row="1"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Orientation="Vertical">
+                    <StackPanel.Visibility>
+                        <MultiBinding Converter="{StaticResource BooleanOrToVisibilityConverter}">
+                            <Binding Path="IsMouseOver"
+                                     RelativeSource="{RelativeSource AncestorType=Border}"/>
+                            <Binding Path="IsShortNoteMenuOpen"/>
+                        </MultiBinding>
+                    </StackPanel.Visibility>
+                    <Button Grid.Row="1"
+                            Style="{StaticResource NoMouseHoverButtonStyle}"
+                            x:Name="OptionsButton"
+                            Content="⋯"
+                            FontSize="20"
+                            Padding="0 -5 0 0"
+                            VerticalContentAlignment="Top"
+                            HorizontalContentAlignment="Center"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0 0 10 0"
+                            Foreground="White"
+                            BorderThickness="0"
+                            BorderBrush="Transparent"
+                            Command="{Binding OpenShortNoteMenuCommand}"/>
+                    <Popup Placement="Bottom"
+                           PlacementTarget="{Binding ElementName=OptionsButton}"
+                           IsOpen="{Binding IsShortNoteMenuOpen, Mode=TwoWay}"
+                           StaysOpen="True">
+                        <Border Background="#494949"
+                                BorderThickness="1"
+                                BorderBrush="Black">
+                            <StackPanel>
+                                <Button Content="Open note" 
+                                        Foreground="White"
+                                        FontSize="15"
+                                        HorizontalContentAlignment="Left"
+                                        Margin="2 5 0 0"
+                                        Padding="10 0 20 0"
+                                        BorderThickness="0"
+                                        Background="Transparent"
+                                        Command="{Binding OpenNoteCommand}"/>
+                                <Button Content="Delete note"
+                                        Foreground="White"
+                                        FontSize="15"
+                                        HorizontalContentAlignment="Left"
+                                        Margin="2 5 0 5"
+                                        Padding="10 0 20 0"
+                                        BorderThickness="0"
+                                        Background="Transparent"
+                                        Command="{Binding DeleteNoteCommand}"
+                                        CommandParameter="{Binding Note}"/>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                </StackPanel>
+                
 
                 <TextBlock Grid.Row="2"
                            Margin="10,5,10,10"

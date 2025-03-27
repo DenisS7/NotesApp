@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NotesApp.View"
+             xmlns:misc="clr-namespace:NotesApp.Misc"
              mc:Ignorable="d" 
              WindowStyle="none"
              Height="300" Width="300"
@@ -74,15 +75,15 @@
                         Command="{Binding CloseCommand}"
                         CommandParameter="{Binding}"/>
             </Grid>
-            <TextBox Grid.Row="1" 
-                     Background="Transparent" 
-                     Margin="5" 
-                     BorderThickness="0" 
-                     FontSize="15" 
-                     Foreground="White"
-                     CaretBrush="White"
-                     TextWrapping="Wrap"
-                     Text="{Binding NoteText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <RichTextBox misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=TwoWay}"
+                         Grid.Row="1"
+                         Background="Transparent" 
+                         Margin="5" 
+                         BorderThickness="0" 
+                         FontSize="15" 
+                         Foreground="White"
+                         CaretBrush="White"
+                         HorizontalScrollBarVisibility="Disabled"/>
 
             <Border Grid.Row="0" 
                     Grid.RowSpan="2" 

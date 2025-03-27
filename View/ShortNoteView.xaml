@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NotesApp.View"
+             xmlns:misc="clr-namespace:NotesApp.Misc"
              xmlns:converters="clr-namespace:NotesApp.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="300"
@@ -158,17 +159,22 @@
                         </Border>
                     </Popup>
                 </StackPanel>
-                
 
-                <TextBlock Grid.Row="2"
-                           Margin="10,5,10,10"
-                           Text="{Binding NoteText}" 
-                           FontSize="13"
-                           Foreground="White"
-                           TextWrapping="Wrap"
-                           FontWeight="DemiBold"
-                           TextTrimming="CharacterEllipsis"
-                           MaxHeight="150"/>
+                <RichTextBox misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=OneWay}"
+                             Background="Transparent"
+                             BorderBrush="Transparent"
+                             IsDocumentEnabled="True"
+                             IsHitTestVisible="False"
+                             Cursor="Arrow"
+                             BorderThickness="0"
+                             IsReadOnly="True"
+                             Grid.Row="2"
+                             Margin="10,5,10,10"
+                             FontSize="13"
+                             Foreground="White"
+                             FontWeight="DemiBold"
+                             MaxHeight="150"
+                             HorizontalScrollBarVisibility="Disabled"/>
             </Grid>
         </Border>
     </Border>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using NotesApp.Commands;
 using NotesApp.Message;
@@ -50,8 +51,11 @@ namespace NotesApp.ViewModel
         {
             if (this.note.ID == note.ID)
             {
-                OnPropertyChanged(nameof(LastUpdateDate));
-                OnPropertyChanged(nameof(NoteText));
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    OnPropertyChanged(nameof(LastUpdateDate));
+                    OnPropertyChanged(nameof(NoteText));
+                });
             }
         }
 

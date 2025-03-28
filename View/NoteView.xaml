@@ -63,7 +63,11 @@
                         Margin="0 -6 0 0"
                         Padding="2 0 0 0"
                         BorderThickness="0,0,0,0"
-                        Command="{Binding CreateNoteCommand}"/>
+                        Command="{Binding CreateNoteCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="New Note"/>
+                    </Button.ToolTip>
+                </Button>
                 <Button Grid.Column="2" 
                         Background="Transparent" 
                         VerticalAlignment="Stretch" 
@@ -75,7 +79,11 @@
                         Margin="5 -8.5 0 0"
                         Padding="4 0 4 0"
                         BorderThickness="0,0,0,0"
-                        Command="{Binding OpenNoteMenuCommand}"/>
+                        Command="{Binding OpenNoteMenuCommand}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Settings"/>
+                    </Button.ToolTip>
+                </Button>
                 <Button Grid.Column="3" 
                         Background="Transparent" 
                         VerticalAlignment="Stretch" 
@@ -87,7 +95,11 @@
                         Margin="0 -8.5 0 0"
                         BorderThickness="0,0,0,0"
                         Command="{Binding CloseCommand}"
-                        CommandParameter="{Binding}"/>
+                        CommandParameter="{Binding}">
+                    <Button.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Close"/>
+                    </Button.ToolTip>
+                </Button>
             </Grid>
             <RichTextBox x:Name="NoteTextBox" 
                          misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=TwoWay}"
@@ -128,17 +140,28 @@
                               Command="EditingCommands.ToggleBold"
                               Content="B" 
                               FontWeight="Bold" 
-                              Margin="2 5 5 5"/>
+                              Margin="2 5 5 5">
+                    <ToggleButton.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Bold"/>
+                    </ToggleButton.ToolTip>
+                </ToggleButton>
                 <ToggleButton Style="{StaticResource RichTextBarButton}" 
                               IsChecked="{Binding IsItalicActive, Mode=TwoWay}"
                               CommandTarget="{Binding ElementName=NoteTextBox}"
                               Command="EditingCommands.ToggleItalic"
                               Content="I" 
-                              FontStyle="Italic"/>
-                <ToggleButton Style="{StaticResource RichTextBarButton}"
+                              FontStyle="Italic">
+                    <ToggleButton.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Italic"/>
+                    </ToggleButton.ToolTip>
+                </ToggleButton>
+                    <ToggleButton Style="{StaticResource RichTextBarButton}"
                               IsChecked="{Binding IsUnderlineActive, Mode=TwoWay}"
                               CommandTarget="{Binding ElementName=NoteTextBox}"
                               Command="{x:Static EditingCommands.ToggleUnderline}">
+                    <ToggleButton.ToolTip>
+                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Underline"/>
+                    </ToggleButton.ToolTip>
                     <TextBlock FontSize="18">
                         <Run Text="U" TextDecorations="Underline"/>
                     </TextBlock>

@@ -124,7 +124,11 @@
                             Foreground="White"
                             BorderThickness="0"
                             BorderBrush="Transparent"
-                            Command="{Binding OpenShortNoteMenuCommand}"/>
+                            Command="{Binding OpenShortNoteMenuCommand}">
+                        <Button.ToolTip>
+                            <ToolTip Style="{StaticResource DefaultToolTip}" Content="Menu"></ToolTip>
+                        </Button.ToolTip>
+                    </Button>
                     <Popup Placement="Bottom"
                            PlacementTarget="{Binding ElementName=OptionsButton}"
                            HorizontalOffset="-40"
@@ -172,7 +176,7 @@
                              Margin="10,5,10,10"
                              FontSize="13"
                              Foreground="White"
-                             FontWeight="DemiBold"
+                             FontWeight="Normal"
                              MaxHeight="150"
                              HorizontalScrollBarVisibility="Disabled"/>
             </Grid>

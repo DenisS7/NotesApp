@@ -16,5 +16,29 @@
         <SolidColorBrush x:Key="SearchBoxTextBrush" Color="{StaticResource SearchBoxText}"/>
         <SolidColorBrush x:Key="HoverShadeBrush" Color="{StaticResource HoverShade}"/>
         <SolidColorBrush x:Key="DisabledShadeBrush" Color="{StaticResource DisabledShade}"/>
+
+        <Style TargetType="ToolTip" x:Key="DefaultToolTip">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#242424"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToolTip">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="5">
+                            <ContentPresenter/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </Application>

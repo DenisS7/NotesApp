@@ -7,20 +7,32 @@
         <Color x:Key="NoteList">#242424</Color>
         <Color x:Key="SearchBox">#404040</Color>
         <Color x:Key="SearchBoxText">#b5b5b5</Color>
-        <Color x:Key="HoverShade">#10FFFFFF</Color>
+        <Color x:Key="LightHoverShade">#20FFFFFF</Color>
+        <Color x:Key="LightClickShade">#50FFFFFF</Color>
+        <Color x:Key="DarkHoverShade">#20000000</Color>
+        <Color x:Key="DarkClickShade">#30000000</Color>
         <Color x:Key="DisabledShade">#40000000</Color>
+        <Color x:Key="HoverButton">#505050</Color>
+        <Color x:Key="ClickButton">#454545</Color>
+        <Color x:Key="CheckedButton">#202020</Color>
 
         <SolidColorBrush x:Key="NoteBrush" Color="{StaticResource Note}"/>
         <SolidColorBrush x:Key="NoteListBrush" Color="{StaticResource NoteList}"/>
         <SolidColorBrush x:Key="SearchBoxBrush" Color="{StaticResource SearchBox}"/>
         <SolidColorBrush x:Key="SearchBoxTextBrush" Color="{StaticResource SearchBoxText}"/>
-        <SolidColorBrush x:Key="HoverShadeBrush" Color="{StaticResource HoverShade}"/>
+        <SolidColorBrush x:Key="LightHoverShadeBrush" Color="{StaticResource LightHoverShade}"/>
+        <SolidColorBrush x:Key="LightClickShadeBrush" Color="{StaticResource LightClickShade}"/>
+        <SolidColorBrush x:Key="DarkHoverShadeBrush" Color="{StaticResource DarkHoverShade}"/>
+        <SolidColorBrush x:Key="DarkClickShadeBrush" Color="{StaticResource DarkClickShade}"/>
         <SolidColorBrush x:Key="DisabledShadeBrush" Color="{StaticResource DisabledShade}"/>
+        <SolidColorBrush x:Key="HoverButtonBrush" Color="{StaticResource HoverButton}"/>
+        <SolidColorBrush x:Key="ClickButtonBrush" Color="{StaticResource ClickButton}"/>
+        <SolidColorBrush x:Key="CheckedButtonBrush" Color="{StaticResource CheckedButton}"/>
 
         <Style TargetType="ToolTip" x:Key="DefaultToolTip">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Background" Value="#242424"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="{StaticResource NoteListBrush}"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="Black"/>
@@ -35,6 +47,119 @@
                                 CornerRadius="5">
                             <ContentPresenter/>
                         </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DefaultButton"  BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="LightDefaultButton" BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource LightHoverShadeBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource LightClickShadeBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DarkDefaultButton" BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkHoverShadeBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkClickShadeBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ToggleButton" x:Key="DefaultToggleButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkHoverShadeBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DarkClickShadeBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource CheckedButtonBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

@@ -10,10 +10,11 @@
              MinHeight="100" MinWidth="200"
              MaxHeight="100" MaxWidth="300"
              HorizontalAlignment="Right"
-             VerticalAlignment="Top">
+             VerticalAlignment="Top"
+             Background="{StaticResource NoteBrush}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="34"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="33"/>
             <RowDefinition Height="33"/>
             <RowDefinition Height="*"/>
@@ -22,25 +23,23 @@
         <Rectangle Grid.Row="0" 
                    Fill="LightSkyBlue"/>
         <Button Grid.Row="1"
+                Style="{StaticResource LightDefaultButton}"
                 Content="Note List"
                 HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Padding="10 0 0 0"
                 FontSize="20"
-                BorderThickness="0"
-                BorderBrush="Transparent"
-                Background="{StaticResource NoteBrush}"
                 Foreground="White"
                 Command="{Binding OpenNoteListCommand}"/>
         <Button Grid.Row="2"
+                Style="{StaticResource LightDefaultButton}"
                 Content="Delete Note"
                 HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Center"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
                 Padding="10 0 0 0"
                 FontSize="20"
-                BorderThickness="0"
-                BorderBrush="Transparent"
-                Background="{StaticResource NoteBrush}"
                 Foreground="White"
                 Command="{Binding DeleteNoteCommand}"
                 CommandParameter="{Binding Note}"/>

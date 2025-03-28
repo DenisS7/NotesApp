@@ -16,7 +16,7 @@
         <converters:InvertBooleanAndToVisibilityConverter x:Key="InvertBooleanAndToVisibilityConverter"/>
         <converters:BooleanOrToVisibilityConverter x:Key="BooleanOrToVisibilityConverter"/>
 
-        <Style TargetType="Button" x:Key="NoMouseHoverButtonStyle">
+        <Style TargetType="Button" x:Key="NoMouseHoverButtonStyle" BasedOn="{StaticResource DefaultButton}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -64,10 +64,10 @@
                     <Setter Property="Background" Value="Transparent"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsShortNoteMenuOpen}" Value="True">
-                            <Setter Property="Background" Value="{StaticResource HoverShadeBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource LightHoverShadeBrush}"/>
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource HoverShadeBrush}"/>
+                            <Setter Property="Background" Value="{StaticResource LightHoverShadeBrush}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -110,20 +110,15 @@
                             <Binding Path="IsShortNoteMenuOpen"/>
                         </MultiBinding>
                     </StackPanel.Visibility>
-                    <Button Grid.Row="1"
-                            Style="{StaticResource NoMouseHoverButtonStyle}"
+                    <Button Style="{StaticResource NoMouseHoverButtonStyle}"
                             x:Name="OptionsButton"
                             Content="⋯"
                             FontSize="20"
                             Padding="0 -5 0 0"
                             VerticalContentAlignment="Top"
-                            HorizontalContentAlignment="Center"
-                            VerticalAlignment="Center"
                             HorizontalAlignment="Right"
                             Margin="0 0 10 0"
                             Foreground="White"
-                            BorderThickness="0"
-                            BorderBrush="Transparent"
                             Command="{Binding OpenShortNoteMenuCommand}">
                         <Button.ToolTip>
                             <ToolTip Style="{StaticResource DefaultToolTip}" Content="Menu"></ToolTip>
@@ -141,22 +136,20 @@
                                 BorderBrush="Black">
                             <StackPanel>
                                 <Button Content="Open note" 
+                                        Style="{StaticResource LightDefaultButton}"
                                         Foreground="White"
                                         FontSize="15"
                                         HorizontalContentAlignment="Left"
                                         Margin="2 5 0 0"
                                         Padding="10 0 20 0"
-                                        BorderThickness="0"
-                                        Background="Transparent"
                                         Command="{Binding OpenNoteCommand}"/>
                                 <Button Content="Delete note"
+                                        Style="{StaticResource LightDefaultButton}"
                                         Foreground="White"
                                         FontSize="15"
                                         HorizontalContentAlignment="Left"
                                         Margin="2 5 0 5"
                                         Padding="10 0 20 0"
-                                        BorderThickness="0"
-                                        Background="Transparent"
                                         Command="{Binding DeleteNoteCommand}"
                                         CommandParameter="{Binding Note}"/>
                             </StackPanel>

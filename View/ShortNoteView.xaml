@@ -163,7 +163,7 @@
                 <RichTextBox misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=OneWay}"
                              Background="Transparent"
                              BorderBrush="Transparent"
-                             IsDocumentEnabled="True"
+                             IsDocumentEnabled="False"
                              IsHitTestVisible="False"
                              Cursor="Arrow"
                              BorderThickness="0"

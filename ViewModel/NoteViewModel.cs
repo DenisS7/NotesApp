@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using NotesApp.Commands;
 using NotesApp.Message;
@@ -17,6 +20,47 @@ namespace NotesApp.ViewModel
         private Note note;
         private bool isMenuVisible;
 
+        private bool isBoldActive = false;
+        public bool IsBoldActive
+        {
+            get
+            {
+                return isBoldActive;
+            }
+            set
+            {
+                isBoldActive = value;
+                OnPropertyChanged(nameof(IsBoldActive));
+            }
+        }
+
+        private bool isItalicActive = false;
+        public bool IsItalicActive
+        {
+            get
+            {
+                return isItalicActive;
+            }
+            set
+            {
+                isItalicActive = value;
+                OnPropertyChanged(nameof(IsItalicActive));
+            }
+        }
+
+        private bool isUnderlineActive = false;
+        public bool IsUnderlineActive
+        {
+            get
+            {
+                return isUnderlineActive;
+            }
+            set
+            {
+                isUnderlineActive = value;
+                OnPropertyChanged(nameof(IsUnderlineActive));
+            }
+        }
         public Note Note => note;
 
         public bool IsMenuVisible
@@ -32,8 +76,8 @@ namespace NotesApp.ViewModel
             }
         }
 
-		private string noteText;
 		public int NoteId { get; }
+		private string noteText;
 		public string NoteText
 		{
 			get

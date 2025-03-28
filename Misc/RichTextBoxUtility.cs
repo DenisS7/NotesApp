@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotesApp.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -36,6 +37,16 @@ namespace NotesApp.Misc
         public static void SetIsUpdatingInternal(DependencyObject obj, bool value) =>
             obj.SetValue(IsUpdatingInternalProperty, value);
 
+        public static readonly DependencyProperty MonitorFormattingProperty =
+            DependencyProperty.RegisterAttached(
+                "MonitorFormatting",
+                typeof(bool),
+                typeof(RichTextBoxUtility),
+                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnMonitorFormattingChanged));
+        public static bool GetMonitorFormatting(DependencyObject obj) =>
+            (bool)obj.GetValue(MonitorFormattingProperty);
+        public static void SetMonitorFormatting(DependencyObject obj, bool value) =>
+            obj.SetValue(MonitorFormattingProperty, value);
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is RichTextBox rtb && !GetIsUpdatingInternal(rtb))
@@ -72,6 +83,67 @@ namespace NotesApp.Misc
                 SetText(rtb, Encoding.UTF8.GetString(ms.ToArray()));
 
                 SetIsUpdatingInternal(rtb, false);
+            }
+        }
+
+        private static void OnMonitorFormattingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is RichTextBox rtb)
+            {
+                if ((bool)e.NewValue)
+                {
+                    rtb.SelectionChanged += Rtb_SelectionChanged;
+                }
+                else
+                {
+                    rtb.SelectionChanged -= Rtb_SelectionChanged;
+                }
+            }
+        }
+
+        private static void Rtb_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (sender is RichTextBox rtb && rtb.DataContext is NoteViewModel nvm)
+            {
+                {
+                    object currentWeight = rtb.Selection.GetPropertyValue(Inline.FontWeightProperty);
+                    bool isBold = false;
+                    if (currentWeight != DependencyProperty.UnsetValue && currentWeight is FontWeight fw)
+                    {
+                        isBold = fw == FontWeights.Bold;
+                    }
+
+                    nvm.IsBoldActive = isBold;
+                }
+
+                {
+                    object currentStyle = rtb.Selection.GetPropertyValue(Inline.FontStyleProperty);
+                    bool isItalic = false;
+                    if (currentStyle != DependencyProperty.UnsetValue && currentStyle is FontStyle fs)
+                    {
+                        isItalic = fs == FontStyles.Italic;
+                    }
+
+                    nvm.IsItalicActive = isItalic;
+                }
+
+                {
+                    object currentDeco = rtb.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+                    bool isUnderline = false;
+                    if (currentDeco != DependencyProperty.UnsetValue && currentDeco is TextDecorationCollection tdc)
+                    {
+                        foreach (TextDecoration deco in tdc)
+                        {
+                            if (deco.Location == TextDecorationLocation.Underline)
+                            {
+                                isUnderline = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    nvm.IsUnderlineActive = isUnderline;
+                }
             }
         }
     }

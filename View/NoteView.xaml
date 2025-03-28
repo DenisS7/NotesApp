@@ -16,6 +16,19 @@
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style TargetType="ToggleButton" x:Key="RichTextBarButton">
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Margin" Value="5 5 5 5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Focusable" Value="False"/>
+        </Style>
     </Window.Resources>
 
     <Border CornerRadius="0" Background="{StaticResource NoteBrush}">
@@ -23,6 +36,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
             <Rectangle Grid.Row="0" Fill="LightSkyBlue" RadiusX="0" RadiusY="0"></Rectangle>
@@ -75,8 +89,11 @@
                         Command="{Binding CloseCommand}"
                         CommandParameter="{Binding}"/>
             </Grid>
-            <RichTextBox misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=TwoWay}"
+            <RichTextBox x:Name="NoteTextBox" 
+                         misc:RichTextBoxUtility.Text="{Binding NoteText, Mode=TwoWay}"
+                         misc:RichTextBoxUtility.MonitorFormatting="True"
                          Grid.Row="1"
+                         IsDocumentEnabled="True"
                          Background="Transparent" 
                          Margin="5" 
                          BorderThickness="0" 
@@ -98,6 +115,36 @@
                 </Border.InputBindings>
                 <local:NoteMenu/>
             </Border>
+
+            <Separator Grid.Row="2" Background="Gray" VerticalAlignment="Top"/>
+            <StackPanel  Grid.Row="2" 
+                Orientation="Horizontal"
+                Margin="5 0 5 0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <ToggleButton Style="{StaticResource RichTextBarButton}" 
+                              IsChecked="{Binding IsBoldActive, Mode=TwoWay}"
+                              CommandTarget="{Binding ElementName=NoteTextBox}"
+                              Command="EditingCommands.ToggleBold"
+                              Content="B" 
+                              FontWeight="Bold" 
+                              Margin="2 5 5 5"/>
+                <ToggleButton Style="{StaticResource RichTextBarButton}" 
+                              IsChecked="{Binding IsItalicActive, Mode=TwoWay}"
+                              CommandTarget="{Binding ElementName=NoteTextBox}"
+                              Command="EditingCommands.ToggleItalic"
+                              Content="I" 
+                              FontStyle="Italic"/>
+                <ToggleButton Style="{StaticResource RichTextBarButton}"
+                              IsChecked="{Binding IsUnderlineActive, Mode=TwoWay}"
+                              CommandTarget="{Binding ElementName=NoteTextBox}"
+                              Command="{x:Static EditingCommands.ToggleUnderline}">
+                    <TextBlock FontSize="18">
+                        <Run Text="U" TextDecorations="Underline"/>
+                    </TextBlock>
+                </ToggleButton>
+            </StackPanel>
+
         </Grid>
 
     </Border>

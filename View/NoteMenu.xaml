@@ -121,7 +121,7 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Padding="10 0 0 0"
-                FontSize="20"
+                FontSize="18"
                 Foreground="White"
                 Command="{Binding OpenNoteListCommand}">
             <Button.ToolTip>
@@ -135,7 +135,7 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 Padding="10 0 0 0"
-                FontSize="20"
+                FontSize="18"
                 Foreground="White"
                 Command="{Binding DeleteNoteCommand}"
                 CommandParameter="{Binding Note}">

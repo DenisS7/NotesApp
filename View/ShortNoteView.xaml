@@ -142,18 +142,28 @@
                                         Foreground="White"
                                         FontSize="15"
                                         HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Left"
                                         Margin="2 5 0 0"
                                         Padding="10 0 20 0"
-                                        Command="{Binding OpenNoteCommand}"/>
+                                        Command="{Binding OpenNoteCommand}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Open note"/>
+                                    </Button.ToolTip>
+                                </Button>
                                 <Button Content="Delete note"
                                         Style="{StaticResource LightDefaultButton}"
                                         Foreground="White"
                                         FontSize="15"
                                         HorizontalContentAlignment="Left"
+                                        HorizontalAlignment="Left"
                                         Margin="2 5 0 5"
                                         Padding="10 0 20 0"
                                         Command="{Binding DeleteNoteCommand}"
-                                        CommandParameter="{Binding Note}"/>
+                                        CommandParameter="{Binding Note}">
+                                    <Button.ToolTip>
+                                        <ToolTip Style="{StaticResource DefaultToolTip}" Content="Delete note"/>
+                                    </Button.ToolTip>
+                                </Button>
                             </StackPanel>
                         </Border>
                     </Popup>

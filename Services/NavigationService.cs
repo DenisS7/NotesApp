@@ -52,7 +52,10 @@ namespace NotesApp.Services
                 if (window.Key is NoteViewModel currentNoteViewModel)
                 {
                     if (currentNoteViewModel.NoteId == note.ID)
+                    {
+                        window.Value.Activate();
                         return;
+                    }
                 }
             }
             NoteViewModel noteViewModel = new NoteViewModel(this, note);

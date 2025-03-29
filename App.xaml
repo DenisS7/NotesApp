@@ -6,7 +6,8 @@
         <Color x:Key="Note">#383838</Color>
         <Color x:Key="NoteList">#242424</Color>
         <Color x:Key="SearchBox">#404040</Color>
-        <Color x:Key="SearchBoxText">#b5b5b5</Color>
+        <Color x:Key="SearchBoxPlaceholderText">#b5b5b5</Color>
+        <Color x:Key="SearchBoxFocusPlaceholderText">#a0a0a0</Color>
         <Color x:Key="LightHoverShade">#20FFFFFF</Color>
         <Color x:Key="LightClickShade">#50FFFFFF</Color>
         <Color x:Key="DarkHoverShade">#20000000</Color>
@@ -19,7 +20,8 @@
         <SolidColorBrush x:Key="NoteBrush" Color="{StaticResource Note}"/>
         <SolidColorBrush x:Key="NoteListBrush" Color="{StaticResource NoteList}"/>
         <SolidColorBrush x:Key="SearchBoxBrush" Color="{StaticResource SearchBox}"/>
-        <SolidColorBrush x:Key="SearchBoxTextBrush" Color="{StaticResource SearchBoxText}"/>
+        <SolidColorBrush x:Key="SearchBoxPlaceholderTextBrush" Color="{StaticResource SearchBoxPlaceholderText}"/>
+        <SolidColorBrush x:Key="SearchBoxFocusPlaceholderTextBrush" Color="{StaticResource SearchBoxFocusPlaceholderText}"/>
         <SolidColorBrush x:Key="LightHoverShadeBrush" Color="{StaticResource LightHoverShade}"/>
         <SolidColorBrush x:Key="LightClickShadeBrush" Color="{StaticResource LightClickShade}"/>
         <SolidColorBrush x:Key="DarkHoverShadeBrush" Color="{StaticResource DarkHoverShade}"/>

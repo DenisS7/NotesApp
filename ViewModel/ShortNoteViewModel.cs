@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using NotesApp.Commands;
 using NotesApp.Message;
 using NotesApp.Model;
@@ -28,7 +29,7 @@ namespace NotesApp.ViewModel
             set { isShortNoteMenuOpen = value; OnPropertyChanged(nameof(IsShortNoteMenuOpen)); }
         }
 
-
+        public Color Color => note.Color;
         public ICommand OpenNoteCommand { get; }
         public ICommand DeleteNoteCommand { get; }
         public ICommand OpenShortNoteMenuCommand { get; }
@@ -53,6 +54,7 @@ namespace NotesApp.ViewModel
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    OnPropertyChanged(nameof(Color));
                     OnPropertyChanged(nameof(LastUpdateDate));
                     OnPropertyChanged(nameof(NoteText));
                 });

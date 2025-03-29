@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace NotesApp.Model
 {
@@ -11,6 +12,7 @@ namespace NotesApp.Model
         public int ID { get; }
         public string Name { get; }
         public string Text { get; set; }
+        public Color Color { get; set; }
         public List<Tag> Tags { get; set; }
         public DateTime CreatedAtDate { get; }
         public DateTime LastUpdatedDate { get; set; }
@@ -23,6 +25,7 @@ namespace NotesApp.Model
             Name = string.Empty;
             Text = string.Empty;
             Tags = [];
+            Color = Colors.LightSkyBlue;
         }
 
         public bool HasTags(List<Tag> tags)

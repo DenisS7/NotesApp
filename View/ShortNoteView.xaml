@@ -15,6 +15,7 @@
         <converters:InvertBooleanToVisibilityConverter x:Key="InvertBooleanToVisibilityConverter"/>
         <converters:InvertBooleanAndToVisibilityConverter x:Key="InvertBooleanAndToVisibilityConverter"/>
         <converters:BooleanOrToVisibilityConverter x:Key="BooleanOrToVisibilityConverter"/>
+        <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
 
         <Style TargetType="Button" x:Key="NoMouseHoverButtonStyle" BasedOn="{StaticResource DefaultButton}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -80,13 +81,14 @@
                 </Grid.RowDefinitions>
 
                 <Rectangle Grid.Row="0" 
-                           Fill="LightBlue" Grid.ColumnSpan="2"/>
+                           Fill="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" 
+                           Grid.ColumnSpan="2"/>
 
                 <TextBlock Grid.Row="1" 
                            x:Name="DateText"
                            Text="{Binding LastUpdateDate, StringFormat={}{0:dd/MM/yy}}"
                            FontSize="10"
-                           Foreground="LightSkyBlue"
+                           Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            Margin="0 5 10 0">

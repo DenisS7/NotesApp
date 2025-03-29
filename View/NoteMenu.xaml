@@ -5,23 +5,115 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NotesApp.View"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300"
-             Height="100" Width="300"
-             MinHeight="100" MinWidth="200"
-             MaxHeight="100" MaxWidth="300"
+             d:DesignHeight="116" d:DesignWidth="300"
+             Height="116" Width="300"
+             MinHeight="116" MinWidth="200"
+             MaxHeight="116" MaxWidth="300"
              HorizontalAlignment="Right"
              VerticalAlignment="Top"
              Background="{StaticResource NoteBrush}">
+
+    <UserControl.Resources>
+        <Style x:Key="ClickableRectangleButton" 
+               TargetType="Button" 
+               BasedOn="{StaticResource DarkDefaultButton}">
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Rectangle x:Name="overlay"
+                                       Fill="Black"
+                                       Opacity="0"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="overlay" Property="Opacity" Value="0.1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="overlay" Property="Opacity" Value="0.2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="33"/>
             <RowDefinition Height="33"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Grid.Row="0" 
-                   Fill="LightSkyBlue"/>
+        <UniformGrid Grid.Row="0"
+                    Columns="7">
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=OrangeRect}">
+                <Rectangle x:Name="OrangeRect" Fill="Orange"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Orange"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=GreenRect}">
+                <Rectangle x:Name="GreenRect" Fill="LimeGreen"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Green"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=PinkRect}">
+                <Rectangle x:Name="PinkRect" Fill="#fc56e7"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Pink"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=RedRect}">
+                <Rectangle x:Name="RedRect" Fill="#ff5454"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Black"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=VioletRect}">
+                <Rectangle x:Name="VioletRect" Fill="#b56eff"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Violet"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=BlueRect}">
+                <Rectangle x:Name="BlueRect" Fill="LightSkyBlue"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Blue"/>
+                </Button.ToolTip>
+            </Button>
+            <Button Style="{StaticResource ClickableRectangleButton}"
+                    Command="{Binding SetNoteColorCommand}"
+                    CommandParameter="{Binding ElementName=GrayRect}">
+                <Rectangle x:Name="GrayRect" Fill="#b0acac"/>
+                <Button.ToolTip>
+                    <ToolTip Style="{StaticResource DefaultToolTip}" Content="Gray"/>
+                </Button.ToolTip>
+            </Button>
+        </UniformGrid>
         <Button Grid.Row="1"
                 Style="{StaticResource LightDefaultButton}"
                 Content="Note List"
@@ -31,7 +123,11 @@
                 Padding="10 0 0 0"
                 FontSize="20"
                 Foreground="White"
-                Command="{Binding OpenNoteListCommand}"/>
+                Command="{Binding OpenNoteListCommand}">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTip}" Content="Note List"/>
+            </Button.ToolTip>
+        </Button>
         <Button Grid.Row="2"
                 Style="{StaticResource LightDefaultButton}"
                 Content="Delete Note"
@@ -42,6 +138,10 @@
                 FontSize="20"
                 Foreground="White"
                 Command="{Binding DeleteNoteCommand}"
-                CommandParameter="{Binding Note}"/>
+                CommandParameter="{Binding Note}">
+            <Button.ToolTip>
+                <ToolTip Style="{StaticResource DefaultToolTip}" Content="Delete Note"/>
+            </Button.ToolTip>
+        </Button>
     </Grid>
 </UserControl>

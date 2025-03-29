@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using NotesApp.Commands;
 using NotesApp.Message;
 using NotesApp.Model;
@@ -76,23 +78,41 @@ namespace NotesApp.ViewModel
             }
         }
 
-		public int NoteId { get; }
-		private string noteText;
+        public int NoteId
+        {
+            get
+            {
+                return note.ID;
+            }
+        }
 		public string NoteText
 		{
 			get
-			{
-				return noteText;
-			}
+            {
+                return note.Text;
+            }
 			set
-			{
-				noteText = value;
-                note.Text = noteText;
+            {
+                note.Text = value;
                 note.LastUpdatedDate = DateTime.Now;
                 OnPropertyChanged(nameof(NoteText));
 				NoteUpdateMessageBus.MessageNoteUpdated(note);
 			}
 		}
+
+        public Color Color
+        {
+            get
+            {
+                return note.Color;
+            }
+            set
+            {
+                note.Color = value;
+                OnPropertyChanged(nameof(Color));
+                NoteUpdateMessageBus.MessageNoteUpdated(note);
+            }
+        }
 
 		public ICommand CreateNoteCommand { get; }
         public ICommand DeleteNoteCommand { get; }
@@ -100,20 +120,20 @@ namespace NotesApp.ViewModel
 		public ICommand OpenNoteMenuCommand { get; }
         public ICommand CloseNoteMenuCommand { get; }
         public ICommand OpenNoteListCommand { get; }
+        public ICommand SetNoteColorCommand { get; }
 
         public NoteViewModel(NavigationService navigationService, Note note)
         {
             this.navigationService = navigationService;
             this.note = note;
             isMenuVisible = false;
-            noteText = note.Text;
-            NoteId = note.ID;
             OpenNoteListCommand = new OpenNoteListCommand(navigationService);
             CreateNoteCommand = new CreateNoteCommand(navigationService);
             DeleteNoteCommand = new DeleteNoteCommand(navigationService);
             CloseCommand = new CloseCommand(navigationService);
             OpenNoteMenuCommand = new RelayCommand(param => ShowMenu());
             CloseNoteMenuCommand = new RelayCommand(param => CloseMenu());
+            SetNoteColorCommand = new RelayCommand(SetNoteColor);
         }
 
         private void ShowMenu()
@@ -124,6 +144,16 @@ namespace NotesApp.ViewModel
         private void CloseMenu()
         {
             IsMenuVisible = false;
+        }
+
+        private void SetNoteColor(object? parameter)
+        {
+            if (parameter is Rectangle rect && rect.Fill is SolidColorBrush scb)
+            {
+                Color = scb.Color;
+                IsMenuVisible = false;
+                
+            }
         }
     }
 }

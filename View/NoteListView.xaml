@@ -58,6 +58,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
@@ -161,6 +162,7 @@
                              Grid.ColumnSpan="2"
                              Style="{StaticResource SearchTextBoxStyle}" 
                              Width="{Binding ElementName=Grid, Path=ActualWidth}"
+                             Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Margin="10 0 0 0"/>
                     <Button Grid.Column="1"
                             Style="{StaticResource LightDefaultButton}"

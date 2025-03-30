@@ -63,6 +63,8 @@ namespace NotesApp.Misc
                     {
                         textRange.Load(ms, DataFormats.Rtf);
                     }
+
+                    textRange.ApplyPropertyValue(TextElement.FontSizeProperty, 14.0);
                 }
 
                 rtb.TextChanged -= Rtb_TextChanged;

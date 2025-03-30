@@ -98,7 +98,7 @@
                          Background="Transparent" 
                          Margin="5" 
                          BorderThickness="0" 
-                         FontSize="15" 
+                         FontSize="14" 
                          Foreground="White"
                          CaretBrush="White"
                          HorizontalScrollBarVisibility="Disabled"/>

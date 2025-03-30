@@ -75,7 +75,7 @@
             </Border.Style>
             <Grid ClipToBounds="True">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="3"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -179,7 +179,7 @@
                              IsReadOnly="True"
                              Grid.Row="2"
                              Margin="10,5,10,10"
-                             FontSize="10"
+                             FontSize="14"
                              Foreground="White"
                              MaxHeight="150"
                              HorizontalScrollBarVisibility="Disabled"/>

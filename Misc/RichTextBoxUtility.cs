@@ -59,8 +59,10 @@ namespace NotesApp.Misc
                 if (!string.IsNullOrEmpty(newText))
                 {
                     TextRange textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                    MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(newText));
-                    textRange.Load(ms, DataFormats.Rtf);
+                    using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(newText)))
+                    {
+                        textRange.Load(ms, DataFormats.Rtf);
+                    }
                 }
 
                 rtb.TextChanged -= Rtb_TextChanged;
@@ -78,9 +80,11 @@ namespace NotesApp.Misc
                 SetIsUpdatingInternal(rtb, true);
 
                 TextRange textRange = new TextRange(rtb.Document.ContentStart, rtb.Document.ContentEnd);
-                MemoryStream ms = new MemoryStream();
-                textRange.Save(ms, DataFormats.Rtf);
-                SetText(rtb, Encoding.UTF8.GetString(ms.ToArray()));
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    textRange.Save(ms, DataFormats.Rtf);
+                    SetText(rtb, Encoding.UTF8.GetString(ms.ToArray()));
+                }
 
                 SetIsUpdatingInternal(rtb, false);
             }

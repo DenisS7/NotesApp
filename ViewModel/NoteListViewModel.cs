@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using NotesApp.Commands;
+using NotesApp.Message;
 using NotesApp.Model;
 using NotesApp.Services;
 
@@ -15,9 +18,24 @@ namespace NotesApp.ViewModel
     {
         private NavigationService navigationService;
         private NoteList noteList;
+        private string searchText;
+        public string SearchText
+        {
+            get
+            {
+                return searchText;
+            }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+                DisplayedShortNoteViewModels.Refresh();
+            }
+        }
 
-        public ObservableCollection<ShortNoteViewModel> ShortNoteViewModels { get; private set; }
+        public ObservableCollection<ShortNoteViewModel> ShortNoteViewModels { get; }
 
+        public ICollectionView DisplayedShortNoteViewModels { get; }
         public ICommand CloseCommand { get; }
         public ICommand CreateNoteCommand { get; }
 
@@ -31,6 +49,8 @@ namespace NotesApp.ViewModel
             ShortNoteViewModels =
                 new ObservableCollection<ShortNoteViewModel>(
                     noteList.Notes.Select(note => new ShortNoteViewModel(note, navigationService)));
+            DisplayedShortNoteViewModels = CollectionViewSource.GetDefaultView(ShortNoteViewModels);
+            DisplayedShortNoteViewModels.Filter = FilterDisplayedNotes;
             CreateNoteCommand = new CreateNoteCommand(navigationService);
         }
 
@@ -49,6 +69,15 @@ namespace NotesApp.ViewModel
                     break;
                 }
             }
+        }
+        private bool FilterDisplayedNotes(object obj)
+        {
+            if (obj is ShortNoteViewModel shortNoteViewModel)
+            {
+                return shortNoteViewModel.Note.ContainsText(SearchText);
+            }
+
+            return false;
         }
     }
 }

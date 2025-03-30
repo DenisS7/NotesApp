@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace NotesApp.Model
@@ -37,6 +41,21 @@ namespace NotesApp.Model
             }
 
             return true;
+        }
+
+        public bool ContainsText(string? text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return true;
+            FlowDocument flowDoc = new FlowDocument();
+            TextRange range = new TextRange(flowDoc.ContentStart, flowDoc.ContentEnd);
+            using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(Text)))
+            {
+                range.Load(ms, DataFormats.Rtf);
+            }
+            if (range.Text.Contains(text, StringComparison.CurrentCultureIgnoreCase))
+                return true;
+            return false;
         }
     }
 }

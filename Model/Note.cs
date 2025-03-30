@@ -17,7 +17,6 @@ namespace NotesApp.Model
         public string Name { get; }
         public string Text { get; set; }
         public Color Color { get; set; }
-        public List<Tag> Tags { get; set; }
         public DateTime CreatedAtDate { get; }
         public DateTime LastUpdatedDate { get; set; }
 
@@ -28,19 +27,7 @@ namespace NotesApp.Model
             LastUpdatedDate = createdAtDate;
             Name = string.Empty;
             Text = string.Empty;
-            Tags = [];
             Color = Colors.LightSkyBlue;
-        }
-
-        public bool HasTags(List<Tag> tags)
-        {
-            foreach (var tag in tags)
-            {
-                if (!Tags.Contains(tag))
-                    return false;
-            }
-
-            return true;
         }
 
         public bool ContainsText(string? text)

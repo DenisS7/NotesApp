@@ -22,7 +22,18 @@ namespace NotesApp.Model
 
         private int GetNewNoteID()
         {
-            return Notes.Count();
+            SortedSet<int> IDs = new SortedSet<int>();
+            foreach (Note note in Notes)
+            {
+                IDs.Add(note.ID);
+            }
+
+            int newID = 0;
+            while (IDs.Contains(newID))
+            {
+                newID++;
+            }
+            return newID;
         }
 
         public Note CreateNote()

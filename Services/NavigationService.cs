@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using NotesApp.Model;
+using NotesApp.Saving;
 using NotesApp.View;
 using NotesApp.ViewModel;
 
@@ -22,11 +23,17 @@ namespace NotesApp.Services
             this.noteList = noteList;
         }
 
+        public void SaveNoteList()
+        {
+            NoteListSavingUtility.SaveNoteList(noteList);
+        }
+
         public void CreateNote()
         {
             Note note = noteList.CreateNote();
             NoteCreated?.Invoke(this, note);
             OpenNote(note);
+            SaveNoteList();
         }
 
         public void DeleteNote(Note note)
@@ -44,6 +51,7 @@ namespace NotesApp.Services
                 noteList.Notes.Remove(note);
                 NoteDeleted.Invoke(this, note);
             }
+            SaveNoteList();
         }
         public void OpenNote(Note note)
         {

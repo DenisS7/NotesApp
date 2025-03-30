@@ -39,10 +39,6 @@ namespace NotesApp.Model
         public Note CreateNote()
         {
             Note note = new Note(GetNewNoteID(), DateTime.Now);
-            note.Text = "Example Text Example Text Example Text Example Text Example Text Example Text\n" +
-                        "Example Text Example Text Example Text Example Text Example Text Example Text\n" +
-                        "Example Text Example Text Example Text Example Text Example Text Example Text\n" +
-                        "Example Text Example Text Example Text Example Text Example Text Example Text\n";
             Notes.Add(note);
             return note;
         }

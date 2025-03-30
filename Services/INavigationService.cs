@@ -10,6 +10,7 @@ namespace NotesApp.Services
 {
     public interface INavigationService
     {
+        void SaveNoteList();
         void CreateNote();
         void OpenNote(Note note);
         void CloseWindow(ViewModelBase viewModelBase);

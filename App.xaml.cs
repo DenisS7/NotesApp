@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using NotesApp.Model;
+using NotesApp.Saving;
 using NotesApp.Services;
 using NotesApp.View;
 using NotesApp.ViewModel;
@@ -15,17 +16,9 @@ namespace NotesApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            NoteList noteList = new NoteList();
-            noteList.CreateNote();
-            noteList.CreateNote();
-            noteList.CreateNote();
+            NoteList noteList = NoteListSavingUtility.LoadNoteList();
             NavigationService navigationService = new NavigationService(noteList);
             navigationService.OpenMenu();
-            //MainWindow = new NoteListView()
-            //{
-            //    DataContext = new NoteListViewModel(navigationService, noteList)
-            //};
-            //MainWindow.Show();
             base.OnStartup(e);
         }
     }

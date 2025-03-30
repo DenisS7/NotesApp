@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using NotesApp.Commands;
 using NotesApp.Message;
 using NotesApp.Model;
@@ -64,7 +65,7 @@ namespace NotesApp.ViewModel
             }
         }
         public Note Note => note;
-
+        private readonly DispatcherTimer autoSaveTimer;
         public bool IsMenuVisible
         {
             get
@@ -96,7 +97,8 @@ namespace NotesApp.ViewModel
                 note.Text = value;
                 note.LastUpdatedDate = DateTime.Now;
                 OnPropertyChanged(nameof(NoteText));
-				NoteUpdateMessageBus.MessageNoteUpdated(note);
+                RestartAutoSaveTimer();
+                NoteUpdateMessageBus.MessageNoteUpdated(note);
 			}
 		}
 
@@ -110,6 +112,7 @@ namespace NotesApp.ViewModel
             {
                 note.Color = value;
                 OnPropertyChanged(nameof(Color));
+                navigationService.SaveNoteList();
                 NoteUpdateMessageBus.MessageNoteUpdated(note);
             }
         }
@@ -134,6 +137,8 @@ namespace NotesApp.ViewModel
             OpenNoteMenuCommand = new RelayCommand(param => ShowMenu());
             CloseNoteMenuCommand = new RelayCommand(param => CloseMenu());
             SetNoteColorCommand = new RelayCommand(SetNoteColor);
+            autoSaveTimer = new DispatcherTimer{ Interval = TimeSpan.FromSeconds(1) };
+            autoSaveTimer.Tick += AutoSaveTimerTick;
         }
 
         private void ShowMenu()
@@ -144,6 +149,18 @@ namespace NotesApp.ViewModel
         private void CloseMenu()
         {
             IsMenuVisible = false;
+        }
+
+        private void RestartAutoSaveTimer()
+        {
+            autoSaveTimer.Stop();
+            autoSaveTimer.Start();
+        }
+
+        private void AutoSaveTimerTick(object sender, EventArgs e)
+        {
+            autoSaveTimer.Stop();
+            navigationService.SaveNoteList();
         }
 
         private void SetNoteColor(object? parameter)

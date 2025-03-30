@@ -179,9 +179,8 @@
                              IsReadOnly="True"
                              Grid.Row="2"
                              Margin="10,5,10,10"
-                             FontSize="13"
+                             FontSize="10"
                              Foreground="White"
-                             FontWeight="Normal"
                              MaxHeight="150"
                              HorizontalScrollBarVisibility="Disabled"/>
             </Grid>

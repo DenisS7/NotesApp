@@ -16,6 +16,7 @@
 
     <Window.Resources>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <converters:InvertStringToVisibilityConverter x:Key="InvertStringToVisibilityConverter"/>
         <Style TargetType="TextBox" x:Key="SearchTextBoxStyle">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -49,7 +50,7 @@
                                 <Setter TargetName="PlaceholderTextBlock" Property="Foreground" Value="{StaticResource SearchBoxFocusPlaceholderTextBrush}"/>
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="False">
-                                <Setter Property="Foreground" Value="{StaticResource SearchBoxPlaceholderTextBrush}"></Setter>
+                                <Setter Property="Foreground" Value="{StaticResource SearchBoxPlaceholderTextBrush}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -140,9 +141,11 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBox Grid.Column="0"
+                                 Grid.ColumnSpan="2"
                                  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Style="{StaticResource SearchTextBoxStyle}"
                                  Margin="10 0 0 0"/>
@@ -150,11 +153,27 @@
                                 Style="{StaticResource LightDefaultButton}"
                                 VerticalAlignment="Stretch"
                                 HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Top"
+                                Margin="0,0,0,0"
+                                Padding="0 0 0 0"
+                                Command="{Binding ClearSearchCommand}"
+                                Visibility="{Binding SearchText, Converter={StaticResource InvertStringToVisibilityConverter}}"
+                                FontSize="30">
+                            <TextBlock Text="×"
+                                       Margin="0 -5 0 0"/>
+                            <Button.ToolTip>
+                                <ToolTip Style="{StaticResource DefaultToolTip}" Content="Clear"/>
+                            </Button.ToolTip>
+                        </Button>
+                        <Button Grid.Column="2"
+                                Style="{StaticResource LightDefaultButton}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
                                 Margin="0"
                                 Content="🔍︎"
                                 FontSize="18">
                             <Button.ToolTip>
-                                <ToolTip Style="{StaticResource DefaultToolTip}" Content="Search"></ToolTip>
+                                <ToolTip Style="{StaticResource DefaultToolTip}" Content="Search"/>
                             </Button.ToolTip>
                         </Button>
                     </Grid>

@@ -38,6 +38,7 @@ namespace NotesApp.ViewModel
         public ICollectionView DisplayedShortNoteViewModels { get; }
         public ICommand CloseCommand { get; }
         public ICommand CreateNoteCommand { get; }
+        public ICommand ClearSearchCommand { get; }
 
         public NoteListViewModel(NavigationService navigationService, NoteList noteList)
         {
@@ -52,6 +53,7 @@ namespace NotesApp.ViewModel
             DisplayedShortNoteViewModels = CollectionViewSource.GetDefaultView(ShortNoteViewModels);
             DisplayedShortNoteViewModels.Filter = FilterDisplayedNotes;
             CreateNoteCommand = new CreateNoteCommand(navigationService);
+            ClearSearchCommand = new RelayCommand(ClearSearch);
         }
 
         private void OnNoteCreated(object sender, Note newNote)
@@ -70,6 +72,12 @@ namespace NotesApp.ViewModel
                 }
             }
         }
+
+        private void ClearSearch(object? obj)
+        {
+            SearchText = string.Empty;
+        }
+
         private bool FilterDisplayedNotes(object obj)
         {
             if (obj is ShortNoteViewModel shortNoteViewModel)

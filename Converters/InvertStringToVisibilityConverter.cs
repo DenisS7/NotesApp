@@ -9,13 +9,13 @@ using System.Windows.Data;
 
 namespace NotesApp.Converters
 {
-    class StringToVisibilityConverter : IValueConverter
+    class InvertStringToVisibilityConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is null || (value is string text && text.Length == 0))
-                return Visibility.Visible;
-            return Visibility.Collapsed;
+                return Visibility.Collapsed;
+            return Visibility.Visible;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

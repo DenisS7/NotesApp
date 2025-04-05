@@ -124,6 +124,9 @@ namespace NotesApp.ViewModel
         public ICommand CloseNoteMenuCommand { get; }
         public ICommand OpenNoteListCommand { get; }
         public ICommand SetNoteColorCommand { get; }
+        public ICommand ToggleBoldCommand { get; }
+        public ICommand ToggleItalicCommand { get; }
+        public ICommand ToggleUnderlineCommand { get; }
 
         public NoteViewModel(NavigationService navigationService, Note note)
         {
@@ -137,6 +140,33 @@ namespace NotesApp.ViewModel
             OpenNoteMenuCommand = new RelayCommand(param => ShowMenu());
             CloseNoteMenuCommand = new RelayCommand(param => CloseMenu());
             SetNoteColorCommand = new RelayCommand(SetNoteColor);
+            ToggleBoldCommand = new RelayCommand(param =>
+            {
+                if(param is RichTextBox rtb)
+                {
+                    EditingCommands.ToggleBold.Execute(null, rtb);
+                    IsBoldActive = !IsBoldActive;
+                }
+            });
+
+            ToggleItalicCommand = new RelayCommand(param =>
+            {
+                if (param is RichTextBox rtb)
+                {
+                    EditingCommands.ToggleItalic.Execute(null, rtb);
+                    IsItalicActive = !IsItalicActive;
+                }
+            });
+
+            ToggleUnderlineCommand = new RelayCommand(param =>
+            {
+                if (param is RichTextBox rtb)
+                {
+                    EditingCommands.ToggleUnderline.Execute(null, rtb);
+                    IsUnderlineActive = !IsUnderlineActive;
+                }
+            });
+
             autoSaveTimer = new DispatcherTimer{ Interval = TimeSpan.FromSeconds(1) };
             autoSaveTimer.Tick += AutoSaveTimerTick;
         }

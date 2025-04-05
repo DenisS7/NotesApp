@@ -101,7 +101,13 @@
                          FontSize="14" 
                          Foreground="White"
                          CaretBrush="White"
-                         HorizontalScrollBarVisibility="Disabled"/>
+                         HorizontalScrollBarVisibility="Disabled">
+                <RichTextBox.InputBindings>
+                    <KeyBinding Key="B" Modifiers="Control" Command="{Binding ToggleBoldCommand}" CommandParameter="{Binding ElementName=NoteTextBox}"/>
+                    <KeyBinding Key="I" Modifiers="Control" Command="{Binding ToggleItalicCommand}" CommandParameter="{Binding ElementName=NoteTextBox}"/>
+                    <KeyBinding Key="U" Modifiers="Control" Command="{Binding ToggleUnderlineCommand}" CommandParameter="{Binding ElementName=NoteTextBox}"/>
+                </RichTextBox.InputBindings>
+            </RichTextBox>
 
             <Border Grid.Row="0" 
                     Grid.RowSpan="3" 
@@ -124,7 +130,7 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center">
                 <ToggleButton Style="{StaticResource RichTextBarButton}" 
-                              IsChecked="{Binding IsBoldActive, Mode=TwoWay}"
+                              IsChecked="{Binding IsBoldActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               CommandTarget="{Binding ElementName=NoteTextBox}"
                               Command="EditingCommands.ToggleBold"
                               Content="B" 
@@ -135,7 +141,7 @@
                     </ToggleButton.ToolTip>
                 </ToggleButton>
                 <ToggleButton Style="{StaticResource RichTextBarButton}" 
-                              IsChecked="{Binding IsItalicActive, Mode=TwoWay}"
+                              IsChecked="{Binding IsItalicActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               CommandTarget="{Binding ElementName=NoteTextBox}"
                               Command="EditingCommands.ToggleItalic"
                               Content="I" 
@@ -145,7 +151,7 @@
                     </ToggleButton.ToolTip>
                 </ToggleButton>
                     <ToggleButton Style="{StaticResource RichTextBarButton}"
-                              IsChecked="{Binding IsUnderlineActive, Mode=TwoWay}"
+                              IsChecked="{Binding IsUnderlineActive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               CommandTarget="{Binding ElementName=NoteTextBox}"
                               Command="{x:Static EditingCommands.ToggleUnderline}">
                     <ToggleButton.ToolTip>

@@ -83,7 +83,7 @@ namespace NotesApp.Services
             noteWindow.Show();
         }
 
-        public void OpenMenu()
+        public void OpenNoteList()
         {
             foreach (var window in openWindows)
             {

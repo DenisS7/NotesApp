@@ -18,7 +18,7 @@ namespace NotesApp.Commands
 
         public override void Execute(object? parameter)
         {
-            navigationService.OpenMenu();
+            navigationService.OpenNoteList();
         }
     }
 }

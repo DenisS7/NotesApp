@@ -13,6 +13,7 @@ namespace NotesApp.Services
         void SaveNoteList();
         void CreateNote();
         void OpenNote(Note note);
+        void OpenNoteList();
         void CloseWindow(ViewModelBase viewModelBase);
     }
 }

@@ -18,7 +18,7 @@ namespace NotesApp
         {
             NoteList noteList = NoteListSavingUtility.LoadNoteList();
             NavigationService navigationService = new NavigationService(noteList);
-            navigationService.OpenMenu();
+            navigationService.OpenNoteList();
             base.OnStartup(e);
         }
     }
